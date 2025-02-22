@@ -1,8 +1,8 @@
 export default defineEventHandler((event) => {
-  console.log("In cors-middleware")  
-  setResponseHeaders(event, {
+  //----> set cors
+    setResponseHeaders(event, {
        "Access-Control-Allow-Methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-        "Access-Control-Allow-Origin": "http://localhost:5173",
+        "Access-Control-Allow-Origin": "http://localhost:4200",
         'Access-Control-Allow-Credentials': 'true',
         "Access-Control-Allow-Headers": 'Content-Type, Authorization',
         "Access-Control-Expose-Headers": '*'

@@ -176,9 +176,25 @@ export function useAuth(){
     return userId
   }
 
+  const isUserAdmin = () => {
+    //----> Get current cookie.
+    const currentCookie = getCurrentCookie();
+
+    return currentCookie?.isAdmin;
+  }
+
+  const isUserAuthenticated = () => {
+    //----> Get current cookie.
+    const currentCookie = getCurrentCookie();
+
+    return currentCookie?.isLoggedIn;
+  }
+
   return{
     adminUser,
     getAuth,
+    isUserAdmin,
+    isUserAuthenticated,
     removeAuth,
     setAuth,
     getCurrentUserId

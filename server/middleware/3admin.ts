@@ -3,8 +3,15 @@ import { useAuth } from "~~/utils/useAuth";
 
 export default defineEventHandler((event) => {
   console.log("In admin-middleware");
-  const {adminUser} = useAuth();
-  if(isAdminRoute(event._path)){
+  //----> Get use-auth.
+  const {adminUser, isUserAdmin} = useAuth();
+
+  //----> Check for admin privilege.
+  const isAdmin = isUserAdmin();
+
+  console.log({isAdmin})
+  
+  if(isUserAdmin()){
      adminUser(event._path);
   }
 })
