@@ -11,7 +11,7 @@ export default defineEventHandler(async(event) => {
   //----> Check for authentication.
   const isAuthenticated = isUserAuthenticated();
   console.log({isPublic, isAuthenticated, route: event?.path})
-  //----> Check for jwt
+  //----> Check for jwt availability.
   if(!isPublic && isAuthenticated)getAuth();
   else if(!isPublic && !isAuthenticated)
    throw sendError(event, createError({statusCode: StatusCodes.UNAUTHORIZED, statusMessage: "Invalid credentials!"}))

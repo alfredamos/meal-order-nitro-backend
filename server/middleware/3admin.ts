@@ -11,6 +11,7 @@ export default defineEventHandler((event) => {
 
   console.log({isAdmin})
   
+  //----> Call admin-user to invoke admin privilege.
   if(isUserAdmin()){
      adminUser();
   }
