@@ -12,6 +12,6 @@ export default defineEventHandler((event) => {
   console.log({isAdmin})
   
   if(isUserAdmin()){
-     adminUser(event._path);
+     adminUser();
   }
 })

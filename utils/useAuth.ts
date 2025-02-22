@@ -1,6 +1,5 @@
 import { StatusCodes } from "http-status-codes";
 import { ResponseAuth } from "~~/models/auth/CookieResponse";
-import { isPublicRoutes } from "./publicRoute";
 import jwt from "jsonwebtoken"
 import { initialUserCredential } from "./initialUserCredentials";
 import { TokenJwt } from "~~/models/auth/TokenJwt";
@@ -50,12 +49,7 @@ export function useAuth(){
   }
 
   //----> Get the auth.
-  const getAuth = (route: string) => {
-    //----> Public Route
-    const isPublic = isPublicRoutes(route);
-  
-    if (isPublic)return;
-
+  const getAuth = () => {
     //----> Extract token
     token = extractToken() as string;
 
@@ -93,10 +87,7 @@ export function useAuth(){
     return false;
   }
 
-  const adminUser = (route: string) =>{
-    //---> Check for public route.
-    const isPublic = isPublicRoutes(route);
-    if (isPublic)return 
+  const adminUser = () =>{
     //----> Extract-token.
     token = extractToken() as string;
     
