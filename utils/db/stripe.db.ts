@@ -3,6 +3,7 @@ import { environment } from "~~/environments/environment.dev";
 import type { OrderPayload } from "~~/models/orders/orderPayload.model";
 
 export class StripeDb {
+  
   stripe: Stripe;
   readonly stripeSecretKey = useRuntimeConfig()?.stripeSecretKey;
 
@@ -11,7 +12,7 @@ export class StripeDb {
     this.stripe = new Stripe(this.stripeSecretKey);
   }
 
-  async paymentCheckout(orderPayload: OrderPayload) {
+  async paymentCheckout(orderPayload: OrderPayload, origin: string) {
     //----> Destructure orderPayload.
     const { cartItems } = orderPayload;
 
@@ -31,8 +32,8 @@ export class StripeDb {
       ],
       payment_method_types: ["card"],
       mode: "payment",
-      success_url: `${environment.stripeUrl}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${environment.stripeUrl}/payment-failure`,
+      success_url: `${origin}/orders/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/orders/payment-failure`,
     });
 
     const { id, url, status, } = session;

@@ -78,7 +78,7 @@ export function useAuth(){
     //----> Get the user role from the token object.
     const userRole = jwtToken?.role;
     const isName = jwtToken?.name;
-     userId = jwtToken?.id
+    const userId = jwtToken?.id;
     //----> Check for admin role.
     const isAuthorizedUser = (userRole === Role.User) || (userRole === Role.Staff);
 
@@ -181,6 +181,11 @@ export function useAuth(){
     return currentCookie?.isLoggedIn;
   }
 
+  const urlOrigin = () => {
+    const origin = event.headers.get('origin')
+    return {origin}
+  }
+
   return{
     adminUser,
     getAuth,
@@ -188,6 +193,7 @@ export function useAuth(){
     isUserAuthenticated,
     removeAuth,
     setAuth,
-    getCurrentUserId
+    getCurrentUserId,
+    urlOrigin
   }
 }

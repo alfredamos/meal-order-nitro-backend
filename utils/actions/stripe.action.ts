@@ -18,9 +18,9 @@ export async function createPaymentIntent(amount: number, description: string){
   return {id, description, client_secret};
 }
 
-export async function stripePaymentCheckout(orderPayload: OrderPayload){
+export async function stripePaymentCheckout(orderPayload: OrderPayload, origin: string){
 
-    const sessionPayload = await stripeDb.paymentCheckout(orderPayload);
+    const sessionPayload = await stripeDb.paymentCheckout(orderPayload, origin);
 
     //-----> If there's sessionPayload, then store the order in the database.
     if (sessionPayload?.id) {
